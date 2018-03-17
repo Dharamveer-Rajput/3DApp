@@ -1,0 +1,85 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+
+android {
+    compileSdkVersion 27
+    buildToolsVersion "27.0.3"
+
+
+    dataBinding {
+        enabled = true
+    }
+
+
+    defaultConfig {
+        applicationId "com.a3dapp"
+        minSdkVersion 15
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs = ['src/test/kotlin']
+        androidTest.java.srcDirs = ['src/androidTest/kotlin']
+    }
+
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:27.1.0'
+    implementation 'com.android.support:support-v4:27.1.0'
+
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    compile 'com.android.support:multidex:1.0.3'
+    compile 'com.android.support:cardview-v7:27.1.0'
+
+    compile 'com.github.d-max:spots-dialog:0.7@aar'
+
+    // Data binding
+    kapt "com.android.databinding:compiler:3.0.1"
+    // Coroutines
+    compile 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.19.3'
+    compile 'org.jetbrains.kotlinx:kotlinx-coroutines-android:0.19.3'
+
+    // Tests
+    testCompile 'com.nhaarman:mockito-kotlin:1.5.0'
+    testCompile 'org.jetbrains.spek:spek:1.0.25'
+
+    compile 'com.intuit.sdp:sdp-android:1.0.5'
+
+    //Droid dialog library
+    compile 'com.github.droidbyme:DroidDialog:c6decc7167'
+
+
+
+}
+repositories {
+    mavenCentral()
+    maven {
+        url "http://repository.jetbrains.com/all"
+    }
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+
+}

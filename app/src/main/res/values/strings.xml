@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">3DApp</string>
+
+    <string name="welcometext">Welcome to AA Inc. Creating 3D Avatar of yourself cannot get simpler than this!!</string>
+
+    <string name="captureimages">Capture Images</string>
+    <string name="create">CREATE</string>
+    <string name="complete">COMPLETE</string>
+    <string name="signin">SIGN IN</string>
+    <string name="dmodel">3D Model</string>
+    <string name="termsandconditions">Terms and conditions</string>
+    <string name="forgetpsw">Forget Password?</string>
+    <string name="areyousuretologout">Are you sure you want to logout?</string>
+    <string name="action_sign_in_short">Sign in</string>
+
+</resources>
