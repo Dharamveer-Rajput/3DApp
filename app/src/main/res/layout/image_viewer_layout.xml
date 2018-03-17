@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/bgcolor"
     tools:context=".activities.ImageViewerActivity4">
 
@@ -27,7 +28,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/dmodel"
-        android:textStyle="bold"
+        app:fontPath="fonts/HindVadodara-Bold.ttf"
         android:layout_marginTop="@dimen/_20sdp"
         android:textSize="@dimen/_22sdp"
         android:textColor="@color/yellowtext" />
@@ -62,7 +63,7 @@
             android:layout_height="wrap_content"
             android:text="@string/complete"
             android:textColor="@color/white"
-            android:textStyle="bold"
+            app:fontPath="fonts/HindVadodara-Bold.ttf"
             android:textSize="@dimen/_15sdp"
             android:padding="@dimen/_10sdp"
             android:layout_centerInParent="true"

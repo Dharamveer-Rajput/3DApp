@@ -30,6 +30,8 @@ class MainActivity2 : AppCompatActivity(), View.OnClickListener {
 
     val CAMERA_REQUEST_CODE = 0
     lateinit var imageFilePath: String
+    private val REQUEST_SELECT_IMAGE_IN_ALBUM = 1
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +52,7 @@ class MainActivity2 : AppCompatActivity(), View.OnClickListener {
         txtFeedback.setOnClickListener(this)
         txtLogout.setOnClickListener(this)
         openDrawer.setOnClickListener(this)
+        imageCloseDrawer.setOnClickListener(this)
 
         imageCamera.setOnClickListener(this)
         myImageViewText.setOnClickListener(this)
@@ -63,6 +66,10 @@ class MainActivity2 : AppCompatActivity(), View.OnClickListener {
 
             R.id.openDrawer -> {
                 drawer_layout.openDrawer(GravityCompat.START)
+            }
+
+            R.id.imageCloseDrawer -> {
+                drawer_layout.closeDrawer(GravityCompat.START)
             }
 
             R.id.myImageViewText -> {
@@ -82,6 +89,14 @@ class MainActivity2 : AppCompatActivity(), View.OnClickListener {
             R.id.txtGallery ->{
                 drawer_layout.closeDrawer(GravityCompat.START)
                 Toast.makeText(applicationContext, "My Gallery", Toast.LENGTH_SHORT).show()
+
+                val intent = Intent()
+                intent.type = "image/*"
+                intent.action = Intent.ACTION_GET_CONTENT
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_SELECT_IMAGE_IN_ALBUM);
+
+
+
             }
             R.id.txtAboutus -> {
                 drawer_layout.closeDrawer(GravityCompat.START)
@@ -117,7 +132,8 @@ class MainActivity2 : AppCompatActivity(), View.OnClickListener {
                         }
                         .typeface("regular.ttf")
                         .animation(AnimUtils.AnimZoomInOut)
-                        .color(ContextCompat.getColor(this, R.color.yellowtext), ContextCompat.getColor(this, R.color.white),
+                        .color(ContextCompat.getColor(this, R.color.yellowtext),
+                                ContextCompat.getColor(this, R.color.white),
                                 ContextCompat.getColor(this, R.color.dark_indigo))
                         .divider(true, ContextCompat.getColor(this, R.color.orange))
                         .show()
