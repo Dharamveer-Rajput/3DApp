@@ -10,7 +10,17 @@ import android.view.inputmethod.EditorInfo
 import com.a3dapp.R
 import dmax.dialog.SpotsDialog
 import kotlinx.android.synthetic.main.activity_login_main.*
+import permissions.dispatcher.RuntimePermissions
+import permissions.dispatcher.NeedsPermission
+import android.Manifest
+import android.view.KeyEvent
+import android.widget.TextView
+import permissions.dispatcher.PermissionRequest
+import permissions.dispatcher.OnShowRationale
+import permissions.dispatcher.OnPermissionDenied
+import permissions.dispatcher.OnNeverAskAgain
 
+@RuntimePermissions
 class LoginActivity1 : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,21 +35,23 @@ class LoginActivity1 : AppCompatActivity() {
 
         setContentView(R.layout.activity_login_main)
 
-        edPassword.setOnEditorActionListener { textView, i, keyEvent ->
+        edPassword.setOnEditorActionListener({ textView, i, keyEvent ->
             if (i == R.id.login || i == EditorInfo.IME_NULL) {
                 login()
                 return@setOnEditorActionListener true
             }
             false
-        }
+        })
 
         btnSignIn.setOnClickListener {
             login()
         }
 
-
+        showCameraWithPermissionCheck();
 
     }
+
+
 
     private fun login() {
 
@@ -63,5 +75,30 @@ class LoginActivity1 : AppCompatActivity() {
 
     }
 
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        // NOTE: delegate the permission handling to generated function
+        onRequestPermissionsResult(requestCode, grantResults)
+    }
+
+    @NeedsPermission(Manifest.permission.CAMERA)
+    fun showCamera() {
+
+    }
+
+    @OnShowRationale(Manifest.permission.CAMERA)
+    fun showRationaleForCamera(request: PermissionRequest) {
+        request.proceed()
+    }
+
+    @OnPermissionDenied(Manifest.permission.CAMERA)
+    fun onCameraDenied() {
+
+    }
+
+    @OnNeverAskAgain(Manifest.permission.CAMERA)
+    fun onCameraNeverAskAgain() {
+
+    }
 
 }
