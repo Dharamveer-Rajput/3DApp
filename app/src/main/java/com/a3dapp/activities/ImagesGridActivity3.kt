@@ -28,6 +28,7 @@ import android.widget.ImageView
 import android.R.attr.data
 import android.content.res.AssetManager
 import android.net.Uri
+import android.os.Handler
 import dmax.dialog.SpotsDialog
 
 
@@ -60,8 +61,17 @@ class ImagesGridActivity3 : AppCompatActivity() {
 
             val dialog = SpotsDialog(this,R.style.CustomProgressDialog)
             dialog.show()
-            val intent = Intent(this, ImageViewerActivity4::class.java)
-            startActivity(intent)
+
+
+            val mHandler = Handler()
+            mHandler.postDelayed(Runnable {
+                //start your activity here
+                val intent = Intent(this, ImageViewerActivity4::class.java)
+                startActivity(intent)
+
+            }, 1000L)
+
+
 
         }
 
