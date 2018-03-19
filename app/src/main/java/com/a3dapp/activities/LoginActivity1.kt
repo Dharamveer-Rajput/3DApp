@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.activity_login_main.*
 import permissions.dispatcher.RuntimePermissions
 import permissions.dispatcher.NeedsPermission
 import android.Manifest
+import android.annotation.SuppressLint
 import android.view.KeyEvent
 import android.widget.TextView
 import permissions.dispatcher.PermissionRequest
@@ -22,6 +23,8 @@ import permissions.dispatcher.OnNeverAskAgain
 
 @RuntimePermissions
 class LoginActivity1 : AppCompatActivity() {
+
+    var isCheckedRadio: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +49,10 @@ class LoginActivity1 : AppCompatActivity() {
         btnSignIn.setOnClickListener {
             login()
         }
+
+
+
+
 
         showCameraWithPermissionCheck();
 
@@ -75,6 +82,7 @@ class LoginActivity1 : AppCompatActivity() {
 
     }
 
+    @SuppressLint("NeedOnRequestPermissionsResult")
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         // NOTE: delegate the permission handling to generated function

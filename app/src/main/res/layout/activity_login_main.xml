@@ -45,6 +45,7 @@
 
 
     <LinearLayout
+        android:paddingTop="@dimen/_20sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -86,13 +87,14 @@
 
 
         <LinearLayout
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
 
             <RadioButton
+                android:id="@+id/radioRememberme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Remember me"
@@ -113,7 +115,7 @@
 
         <Button
             android:id="@+id/btnSignIn"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/signin"
