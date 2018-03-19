@@ -16,7 +16,7 @@ android {
 
     defaultConfig {
         applicationId "com.a3dapp"
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -80,6 +80,9 @@ dependencies {
 
     //Caligraphy
     compile 'uk.co.chrisjenx:calligraphy:2.3.0'
+
+    compile 'com.squareup.okhttp3:okhttp:3.9.1'
+    compile 'com.google.vr:sdk-base:1.30.0'
 
 }
 

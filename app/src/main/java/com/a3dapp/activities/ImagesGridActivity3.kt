@@ -25,6 +25,10 @@ import java.text.SimpleDateFormat
 import java.util.*
 import android.support.v4.app.ActivityCompat.startActivityForResult
 import android.widget.ImageView
+import android.R.attr.data
+import android.content.res.AssetManager
+import android.net.Uri
+import dmax.dialog.SpotsDialog
 
 
 /**
@@ -53,15 +57,41 @@ class ImagesGridActivity3 : AppCompatActivity() {
 
 
         txtCreate.setOnClickListener{
+
+            val dialog = SpotsDialog(this,R.style.CustomProgressDialog)
+            dialog.show()
             val intent = Intent(this, ImageViewerActivity4::class.java)
             startActivity(intent)
+
         }
 
-        // load foods
-        imagesList.add(ImagesModel("Front View", R.drawable.imagesam))
+
+        val assets = applicationContext.assets
+        var models: Array<String>? = null
+        try {
+            models = assets.list("models")
+        } catch (ex: IOException) {
+            Toast.makeText(applicationContext, ex.message, Toast.LENGTH_LONG).show()
+            return
+        }
+
+
+        // load items
+
+
+        for (model in models) {
+            if (model.toLowerCase().endsWith(".obj") || model.toLowerCase().endsWith(".stl") ||
+                    model.toLowerCase().endsWith(".dae")) {
+                val item = ImagesModel("models/$model", model, "models/$model.jpg")
+                imagesList.add(item)
+            }
+        }
+
+
+     /*   imagesList.add(ImagesModel("Front View", R.drawable.imagesam))
         imagesList.add(ImagesModel("Back View", R.drawable.person))
         imagesList.add(ImagesModel("Left View ", R.drawable.person))
-        imagesList.add(ImagesModel("Right View",R.drawable.imagesam))
+        imagesList.add(ImagesModel("Right View",R.drawable.imagesam))*/
 
         adapter = ImagesAdapter(this, imagesList);
         adapter!!.setOnItemClickListener(object : ImagesAdapter.CameraClickListener {
@@ -99,6 +129,19 @@ class ImagesGridActivity3 : AppCompatActivity() {
 
     }
 
+
+    private fun loadDemo(selectedItem: String) {
+        val intent = Intent(this, ImageViewerActivity4::class.java)
+        val b = Bundle()
+        b.putString("assetDir", "models")
+        b.putString("assetFilename", selectedItem)
+        b.putString("immersiveMode", "true")
+        intent.putExtras(b)
+        startActivity(intent)
+
+    }
+
+
     @Throws(IOException::class)
     fun createImageFile(): File {
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
@@ -117,12 +160,15 @@ class ImagesGridActivity3 : AppCompatActivity() {
 
         when(requestCode) {
             CAMERA_REQUEST_CODE -> {
-                /*                if(resultCode == Activity.RESULT_OK && data != null) {
+                     /*           if(resultCode == Activity.RESULT_OK && data != null) {
                      photoImageView.setImageBitmap(data.extras.get("data") as Bitmap)
                  }*/
 
                 if(resultCode == Activity.RESULT_OK) {
-                     imageViewGl?.setImageBitmap(setScaledBitmap())
+
+
+                        imageViewGl?.setImageBitmap(setScaledBitmap())
+
 
                     Toast.makeText(this, "Photo has been captured", Toast.LENGTH_SHORT).show()
 
@@ -197,7 +243,17 @@ class ImagesGridActivity3 : AppCompatActivity() {
             val food = this.foodsList[position]
             var inflator = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             var gridView = inflator.inflate(R.layout.grid_item_layout, null)
-            gridView.imagePerson.setImageResource(food.image!!)
+
+            try {
+                val bitmap = BitmapFactory.decodeStream(context!!.getAssets().open(foodsList[position].image))
+                gridView.imagePerson.setImageBitmap(bitmap)
+            } catch (e: Exception) {
+                gridView.imagePerson.setImageResource(R.drawable.person)
+            }
+
+
+
+           // gridView.imagePerson.setImageResource(food.image!!)
             gridView.tvName.text = food.name!!
 
             gridView.imageCameraGrid.setOnClickListener(object : View.OnClickListener {
@@ -208,13 +264,6 @@ class ImagesGridActivity3 : AppCompatActivity() {
 
 
             })
-
-
-        /*    gridView.gridRowClick.setOnClickListener {
-
-
-
-            }*/
 
 
             return gridView

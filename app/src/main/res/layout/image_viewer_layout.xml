@@ -35,12 +35,21 @@
 
 
 
-    <ImageView
-        android:layout_below="@id/txt3dmodel"
-        android:layout_above="@id/btm"
+    <!--<ImageView
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/person"/>
+-->
+    <com.a3dapp.util.GLView
+        android:layout_below="@id/txt3dmodel"
+        android:id="@+id/gl_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:keepScreenOn="true"
+        android:gravity="center"
+        />
+
 
     <RelativeLayout
         android:id="@+id/btm"

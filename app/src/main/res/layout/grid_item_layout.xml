@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_120sdp"
         app:srcCompat="@drawable/imagesam"
-        android:padding="@dimen/_10sdp"/>
+        />
 
     <ImageView
         android:id="@+id/imageCameraGrid"
