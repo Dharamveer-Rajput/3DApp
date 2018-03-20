@@ -11,9 +11,12 @@ import android.os.Bundle;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+
 
 import com.a3dapp.R;
 
@@ -67,6 +70,13 @@ public class CameraActivity extends Activity implements Camera.PictureCallback, 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Remove title bar
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        //Remove notification bar
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
 
         setContentView(R.layout.activity_camera);
 
@@ -177,10 +187,7 @@ public class CameraActivity extends Activity implements Camera.PictureCallback, 
 
     private void setupImageDisplay() {
         Bitmap bitmap = BitmapFactory.decodeByteArray(mCameraData, 0, mCameraData.length);
-        Bitmap bmpimg = Bitmap.createScaledBitmap(bitmap, 100, 50, true);
-
-
-        mCameraImage.setImageBitmap(bmpimg);
+        mCameraImage.setImageBitmap(RotateBitmap(bitmap,90));
         mCamera.stopPreview();
         mCameraPreview.setVisibility(View.INVISIBLE);
         mCameraImage.setVisibility(View.VISIBLE);
@@ -189,7 +196,12 @@ public class CameraActivity extends Activity implements Camera.PictureCallback, 
     }
 
 
-
+    public static Bitmap RotateBitmap(Bitmap source, float angle)
+    {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
+    }
 
 }
 

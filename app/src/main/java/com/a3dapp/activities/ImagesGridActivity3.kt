@@ -27,6 +27,7 @@ import android.support.v4.app.ActivityCompat.startActivityForResult
 import android.widget.ImageView
 import android.R.attr.data
 import android.content.res.AssetManager
+import android.graphics.Matrix
 import android.net.Uri
 import android.os.Handler
 import dmax.dialog.SpotsDialog
@@ -174,7 +175,8 @@ class ImagesGridActivity3 : AppCompatActivity() {
                 if (cameraData != null) {
                     mCameraBitmap = BitmapFactory.decodeByteArray(cameraData, 0, cameraData.size)
 
-                    imageViewGl!!.setImageBitmap(mCameraBitmap)
+
+                    imageViewGl!!.setImageBitmap(RotateBitmap(mCameraBitmap!!,90f))
                    // mSaveImageButton.setEnabled(true)
                 }
             } else {
@@ -186,6 +188,11 @@ class ImagesGridActivity3 : AppCompatActivity() {
 
     }
 
+    fun RotateBitmap(source: Bitmap, angle: Float): Bitmap {
+        val matrix = Matrix()
+        matrix.postRotate(angle)
+        return Bitmap.createBitmap(source, 0, 0, source.width, source.height, matrix, true)
+    }
 
 
     /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
