@@ -6,9 +6,9 @@ package com.a3dapp.models
 class ImagesModel {
 
     var name: String? = null
-    var image: String? = null
+    var image: Int? = null
 
-    constructor(path: String,name: String, image: String) {
+   constructor(name: String, image: Int) {
         this.name = name
         this.image = image
     }

@@ -46,7 +46,7 @@ class MainActivity2 : AppCompatActivity(), View.OnClickListener {
 
 
         txtMyProfile.setOnClickListener(this)
-        txtMyImages.setOnClickListener(this)
+       // txtMyImages.setOnClickListener(this)
         txtGallery.setOnClickListener(this)
         txtAboutus.setOnClickListener(this)
         txtFeedback.setOnClickListener(this)
@@ -55,7 +55,6 @@ class MainActivity2 : AppCompatActivity(), View.OnClickListener {
         imageCloseDrawer.setOnClickListener(this)
 
         imageCamera.setOnClickListener(this)
-        myImageViewText.setOnClickListener(this)
         openDrawer.setOnClickListener(this)
 
     }
@@ -72,11 +71,6 @@ class MainActivity2 : AppCompatActivity(), View.OnClickListener {
                 drawer_layout.closeDrawer(GravityCompat.START)
             }
 
-            R.id.myImageViewText -> {
-
-                val intent = Intent(this, ImagesGridActivity3::class.java)
-                startActivity(intent)
-            }
 
             R.id.txtMyProfile ->{
                 drawer_layout.closeDrawer(GravityCompat.START)
@@ -142,8 +136,11 @@ class MainActivity2 : AppCompatActivity(), View.OnClickListener {
             R.id.imageCamera -> {
                 //   Toast.makeText(this,"Camera Open",Toast.LENGTH_SHORT).show()
 
+                val intent = Intent(this, ImagesGridActivity3::class.java)
+                startActivity(intent)
 
-                try {
+
+           /*     try {
                     val imageFile = createImageFile()
                     val callCameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                     if(callCameraIntent.resolveActivity(packageManager) != null) {
@@ -154,7 +151,7 @@ class MainActivity2 : AppCompatActivity(), View.OnClickListener {
                     }
                 } catch (e: IOException) {
                     Toast.makeText(this, "Could not create file!", Toast.LENGTH_SHORT).show()
-                }
+                }*/
             }
 
         }

@@ -43,6 +43,9 @@ class ImagesGridActivity3 : AppCompatActivity() {
     val CAMERA_REQUEST_CODE = 0
     lateinit var imageFilePath: String
     var imageViewGl: ImageView? = null
+    private val TAKE_PICTURE_REQUEST_B = 100
+    private var mCameraBitmap: Bitmap? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,19 +92,19 @@ class ImagesGridActivity3 : AppCompatActivity() {
         // load items
 
 
-        for (model in models) {
+      /*  for (model in models) {
             if (model.toLowerCase().endsWith(".obj") || model.toLowerCase().endsWith(".stl") ||
                     model.toLowerCase().endsWith(".dae")) {
                 val item = ImagesModel("models/$model", model, "models/$model.jpg")
                 imagesList.add(item)
             }
-        }
+        }*/
 
 
-     /*   imagesList.add(ImagesModel("Front View", R.drawable.imagesam))
+        imagesList.add(ImagesModel("Front View", R.drawable.imagesam))
         imagesList.add(ImagesModel("Back View", R.drawable.person))
         imagesList.add(ImagesModel("Left View ", R.drawable.person))
-        imagesList.add(ImagesModel("Right View",R.drawable.imagesam))*/
+        imagesList.add(ImagesModel("Right View",R.drawable.imagesam))
 
         adapter = ImagesAdapter(this, imagesList);
         adapter!!.setOnItemClickListener(object : ImagesAdapter.CameraClickListener {
@@ -111,7 +114,10 @@ class ImagesGridActivity3 : AppCompatActivity() {
 
                  imageViewGl  = imageView
 
-                try {
+                startImageCapture()
+
+
+                /*  try {
                     val imageFile = createImageFile()
                     val callCameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                     if(callCameraIntent.resolveActivity(packageManager) != null) {
@@ -122,7 +128,7 @@ class ImagesGridActivity3 : AppCompatActivity() {
                     }
                 } catch (e: IOException) {
                     Toast.makeText(this@ImagesGridActivity3, "Could not create file!", Toast.LENGTH_SHORT).show()
-                }
+                }*/
 
             }
 
@@ -137,6 +143,12 @@ class ImagesGridActivity3 : AppCompatActivity() {
 
 
 
+    }
+
+
+    private fun startImageCapture() {
+        // startActivityForResult(new Intent(MediaStore.ACTION_IMAGE_CAPTURE), TAKE_PICTURE_REQUEST_B);
+        startActivityForResult(Intent(this@ImagesGridActivity3, CameraActivity::class.java), TAKE_PICTURE_REQUEST_B)
     }
 
 
@@ -164,15 +176,37 @@ class ImagesGridActivity3 : AppCompatActivity() {
 
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+        if (requestCode == TAKE_PICTURE_REQUEST_B) {
+            if (resultCode == Activity.RESULT_OK) {
+                // Recycle the previous bitmap.
+                if (mCameraBitmap != null) {
+                    mCameraBitmap!!.recycle()
+                    mCameraBitmap = null
+                }
+                val extras = data.extras
+                //   mCameraBitmap = (Bitmap) extras.get("data");
+                val cameraData = extras!!.getByteArray(CameraActivity.EXTRA_CAMERA_DATA)
+                if (cameraData != null) {
+                    mCameraBitmap = BitmapFactory.decodeByteArray(cameraData, 0, cameraData.size)
+                    imageViewGl!!.setImageBitmap(mCameraBitmap)
+                   // mSaveImageButton.setEnabled(true)
+                }
+            } else {
+                mCameraBitmap = null
+               // mSaveImageButton.setEnabled(false)
+            }
+        }
+    }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         when(requestCode) {
             CAMERA_REQUEST_CODE -> {
-                     /*           if(resultCode == Activity.RESULT_OK && data != null) {
+                     *//*           if(resultCode == Activity.RESULT_OK && data != null) {
                      photoImageView.setImageBitmap(data.extras.get("data") as Bitmap)
-                 }*/
+                 }*//*
 
                 if(resultCode == Activity.RESULT_OK) {
 
@@ -190,7 +224,7 @@ class ImagesGridActivity3 : AppCompatActivity() {
 
 
         }
-    }
+    }*/
 
 
 
@@ -253,13 +287,14 @@ class ImagesGridActivity3 : AppCompatActivity() {
             val food = this.foodsList[position]
             var inflator = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             var gridView = inflator.inflate(R.layout.grid_item_layout, null)
+            gridView.imagePerson.setImageResource(food.image!!)
 
-            try {
+           /* try {
                 val bitmap = BitmapFactory.decodeStream(context!!.getAssets().open(foodsList[position].image))
                 gridView.imagePerson.setImageBitmap(bitmap)
             } catch (e: Exception) {
                 gridView.imagePerson.setImageResource(R.drawable.person)
-            }
+            }*/
 
 
 

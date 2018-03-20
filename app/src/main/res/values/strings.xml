@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">3DApp</string>
+    <string name="app_name">AAINC</string>
 
     <string name="welcometext">Welcome to AA Inc. Creating 3D Avatar of yourself cannot get simpler than this!!</string>
 
@@ -12,5 +12,10 @@
     <string name="forgetpsw">Forget Password?</string>
     <string name="areyousuretologout">Are you sure you want to logout?</string>
     <string name="action_sign_in_short">Sign in</string>
+
+    <string name="capture_image">Capture</string>
+
+    <string name="done">Done</string>
+    <string name="recapture_image">Retake Picture</string>
 
 </resources>
