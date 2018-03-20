@@ -76,10 +76,10 @@ class MainActivity2 : AppCompatActivity(), View.OnClickListener {
                 drawer_layout.closeDrawer(GravityCompat.START)
                 Toast.makeText(applicationContext, "My Profile", Toast.LENGTH_SHORT).show()
             }
-            R.id.txtMyImages ->{
+           /* R.id.txtMyImages ->{
                 drawer_layout.closeDrawer(GravityCompat.START)
                 Toast.makeText(applicationContext, "My Images", Toast.LENGTH_SHORT).show()
-            }
+            }*/
             R.id.txtGallery ->{
                 drawer_layout.closeDrawer(GravityCompat.START)
                 Toast.makeText(applicationContext, "My Gallery", Toast.LENGTH_SHORT).show()

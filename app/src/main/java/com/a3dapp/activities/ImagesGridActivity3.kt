@@ -92,15 +92,6 @@ class ImagesGridActivity3 : AppCompatActivity() {
         // load items
 
 
-      /*  for (model in models) {
-            if (model.toLowerCase().endsWith(".obj") || model.toLowerCase().endsWith(".stl") ||
-                    model.toLowerCase().endsWith(".dae")) {
-                val item = ImagesModel("models/$model", model, "models/$model.jpg")
-                imagesList.add(item)
-            }
-        }*/
-
-
         imagesList.add(ImagesModel("Front View", R.drawable.imagesam))
         imagesList.add(ImagesModel("Back View", R.drawable.person))
         imagesList.add(ImagesModel("Left View ", R.drawable.person))
@@ -152,16 +143,6 @@ class ImagesGridActivity3 : AppCompatActivity() {
     }
 
 
-    private fun loadDemo(selectedItem: String) {
-        val intent = Intent(this, ImageViewerActivity4::class.java)
-        val b = Bundle()
-        b.putString("assetDir", "models")
-        b.putString("assetFilename", selectedItem)
-        b.putString("immersiveMode", "true")
-        intent.putExtras(b)
-        startActivity(intent)
-
-    }
 
 
     @Throws(IOException::class)
@@ -180,15 +161,19 @@ class ImagesGridActivity3 : AppCompatActivity() {
         if (requestCode == TAKE_PICTURE_REQUEST_B) {
             if (resultCode == Activity.RESULT_OK) {
                 // Recycle the previous bitmap.
-                if (mCameraBitmap != null) {
-                    mCameraBitmap!!.recycle()
-                    mCameraBitmap = null
+
+                if (mCameraBitmap != null && !mCameraBitmap!!.isRecycled()) {
+                   // mCameraBitmap!!.recycle();
+                    mCameraBitmap = null;
                 }
+
+
                 val extras = data.extras
                 //   mCameraBitmap = (Bitmap) extras.get("data");
                 val cameraData = extras!!.getByteArray(CameraActivity.EXTRA_CAMERA_DATA)
                 if (cameraData != null) {
                     mCameraBitmap = BitmapFactory.decodeByteArray(cameraData, 0, cameraData.size)
+
                     imageViewGl!!.setImageBitmap(mCameraBitmap)
                    // mSaveImageButton.setEnabled(true)
                 }
@@ -197,7 +182,11 @@ class ImagesGridActivity3 : AppCompatActivity() {
                // mSaveImageButton.setEnabled(false)
             }
         }
+
+
     }
+
+
 
     /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

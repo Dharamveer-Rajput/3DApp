@@ -6,7 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RawRes;
 import android.util.Log;
 
-import com.dmitrybrant.modelviewer.ModelViewerApplication;
+
+import com.a3dapp.modelviewer.ModelViewerApplication;
 
 import java.io.Closeable;
 import java.io.IOException;

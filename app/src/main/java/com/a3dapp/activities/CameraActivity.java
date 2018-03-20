@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.hardware.Camera;
+import android.media.ExifInterface;
 import android.os.Bundle;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -175,12 +177,19 @@ public class CameraActivity extends Activity implements Camera.PictureCallback, 
 
     private void setupImageDisplay() {
         Bitmap bitmap = BitmapFactory.decodeByteArray(mCameraData, 0, mCameraData.length);
-        mCameraImage.setImageBitmap(bitmap);
+        Bitmap bmpimg = Bitmap.createScaledBitmap(bitmap, 100, 50, true);
+
+
+        mCameraImage.setImageBitmap(bmpimg);
         mCamera.stopPreview();
         mCameraPreview.setVisibility(View.INVISIBLE);
         mCameraImage.setVisibility(View.VISIBLE);
         mCaptureImageButton.setText(R.string.recapture_image);
         mCaptureImageButton.setOnClickListener(mRecaptureImageButtonClickListener);
     }
+
+
+
+
 }
 
