@@ -60,7 +60,6 @@ class ImagesGridActivity3 : AppCompatActivity() {
         setContentView(R.layout.activity_captured_images)
 
 
-
         txtCreate.setOnClickListener{
 
             val dialog = SpotsDialog(this,R.style.CustomProgressDialog)
