@@ -36,15 +36,14 @@
             android:name=".activities.MainActivity2"
             android:screenOrientation="portrait">
 
-
         </activity>
+
         <activity
             android:name=".activities.ImagesGridActivity3"
             android:screenOrientation="portrait">
 
-
-
         </activity>
+
         <activity
             android:name=".activities.ImageViewerActivity4"
             android:screenOrientation="portrait">
