@@ -8,6 +8,7 @@ import android.view.WindowManager
 import com.a3dapp.R
 import com.a3dapp.util.GLView
 import kotlinx.android.synthetic.main.image_viewer_layout.*
+import java.io.InputStream
 
 /**
  * Created by dharamveer on 17/3/18.
@@ -27,6 +28,7 @@ class ImageViewerActivity4: AppCompatActivity() {
         //Remove notification bar
         this.window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         setContentView(R.layout.image_viewer_layout)
+
 
 
 

@@ -39,7 +39,7 @@
         android:stretchMode="columnWidth"
         android:horizontalSpacing="15dp"
         android:padding="@dimen/_10sdp"
-        android:numColumns="auto_fit"
+        android:numColumns="2"
         android:verticalSpacing="15dp"
         android:layout_below="@id/txtCaptureImages"
         android:layout_above="@id/bottomcreate"

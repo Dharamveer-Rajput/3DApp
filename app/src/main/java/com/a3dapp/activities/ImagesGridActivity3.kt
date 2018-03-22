@@ -30,13 +30,25 @@ import android.content.res.AssetManager
 import android.graphics.Matrix
 import android.net.Uri
 import android.os.Handler
+import android.util.Log
 import dmax.dialog.SpotsDialog
 
 
 /**
  * Created by dharamveer on 17/3/18.
  */
-class ImagesGridActivity3 : AppCompatActivity() {
+class ImagesGridActivity3 : AppCompatActivity(), View.OnTouchListener {
+    override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+
+        val inverse = Matrix()
+          imageViewGl!!.getImageMatrix().invert(inverse);
+
+        val pts = floatArrayOf(event!!.getX(), event.getY())
+        inverse.mapPoints(pts);
+
+
+        return false;
+    }
 
 
     var adapter: ImagesAdapter? = null
@@ -194,6 +206,10 @@ class ImagesGridActivity3 : AppCompatActivity() {
 
 
                     imageViewGl!!.setImageBitmap(RotateBitmap(mCameraBitmap!!,90f))
+
+
+                    imageViewGl!!.setOnTouchListener(this)
+
                    // mSaveImageButton.setEnabled(true)
                 }
             } else {
