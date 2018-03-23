@@ -25,8 +25,6 @@ class ImageViewerActivity4: AppCompatActivity() {
         setContentView(R.layout.image_viewer_layout)
 
 
-
-
     }
 
 }
