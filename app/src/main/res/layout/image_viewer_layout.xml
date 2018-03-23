@@ -8,7 +8,7 @@
     tools:context=".activities.ImageViewerActivity4">
 
 
-    <ImageView
+ <!--   <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/imagelefttop"/>
@@ -20,20 +20,18 @@
         android:layout_alignParentRight="true"
         android:src="@drawable/imagerightbottom"/>
 
-
+-->
 
     <TextView
         android:id="@+id/txt3dmodel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:text="@string/dmodel"
+        android:padding="@dimen/_10sdp"
+        android:gravity="center"
         app:fontPath="fonts/HindVadodara-Bold.ttf"
-        android:layout_marginTop="@dimen/_20sdp"
         android:textSize="@dimen/_22sdp"
         android:textColor="@color/yellowtext" />
-
-
 
     <!--<ImageView
 

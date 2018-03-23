@@ -151,25 +151,7 @@ class ImagesGridActivity3 : AppCompatActivity(), View.OnTouchListener {
 
     private fun startImageCapture() {
         // startActivityForResult(new Intent(MediaStore.ACTION_IMAGE_CAPTURE), TAKE_PICTURE_REQUEST_B);
-
-        //camera stuff
-        val imageIntent = Intent(this@ImagesGridActivity3,CameraActivity::class.java)
-      //  val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-
-
-        //folder stuff
-        val imagesFolder = File(Environment.getExternalStorageDirectory(), "AA Inc.")
-        imagesFolder.mkdirs()
-
-        val image = File(imagesFolder, "QR_$timeStamp.jpeg")
-        val uriSavedImage = Uri.fromFile(image)
-
-        imageIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage)
-      //  startActivityForResult(imageIntent, TAKE_PICTURE_REQUEST_B)
-
-
-        startActivityForResult(imageIntent, TAKE_PICTURE_REQUEST_B)
+        startActivityForResult(Intent(this@ImagesGridActivity3, CameraActivity::class.java), TAKE_PICTURE_REQUEST_B)
     }
 
 
