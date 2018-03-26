@@ -104,10 +104,10 @@ class ImagesGridActivity3 : AppCompatActivity(), View.OnTouchListener {
         // load items
 
 
-        imagesList.add(ImagesModel("Front View", R.drawable.imagesam))
-        imagesList.add(ImagesModel("Back View", R.drawable.person))
-        imagesList.add(ImagesModel("Left View ", R.drawable.person))
-        imagesList.add(ImagesModel("Right View",R.drawable.imagesam))
+        imagesList.add(ImagesModel("Front View", R.drawable.front))
+        imagesList.add(ImagesModel("Back View", R.drawable.back))
+        imagesList.add(ImagesModel("Left View ", R.drawable.left))
+        imagesList.add(ImagesModel("Right View",R.drawable.right))
 
         adapter = ImagesAdapter(this, imagesList);
         adapter!!.setOnItemClickListener(object : ImagesAdapter.CameraClickListener {
