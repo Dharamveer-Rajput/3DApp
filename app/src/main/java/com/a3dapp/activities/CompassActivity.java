@@ -92,4 +92,5 @@ public class CompassActivity extends Activity implements SensorEventListener {
         }
         mCustomDrawableView.invalidate();
     }
+
 }
